@@ -1,0 +1,29 @@
+#!/bin/sh
+
+VOSK_MODEL_PATH="$HOME/.local/share/music_fairy/vosk-model-small-en-us-0.15/"
+XHAMSTER_INSTANCE="https://xhamster.com" 
+
+# mpc stop
+# mpc clear
+
+ffmpeg -y -f alsa -i default -acodec pcm_s16le -ac 1 -ar 44100 -t 4 -f wav ~/.cache/audio.wav
+
+vosk-transcriber -m $VOSK_MODEL_PATH -i ~/.cache/audio.wav -o ~/.cache/audio_text.txt
+read audio_input < ~/.cache/audio_text.txt
+
+google_speech " All right.. let me play.. $audio_input" &
+
+query="$(printf '%s' "song audio $audio_input" | tr ' ' '+' )"
+
+video_id="$(curl -s https://xhamster.com/search/big+cock | grep -Eo 'https://xhamster.com/videos/[^"]*' | head -n 1)"
+# youtube_url="https://youtube.com/$video_id"
+
+# audio_url="$(yt-dlp -f bestaudio --get-url "$youtube_url")"
+
+# mpc add "$audio_url"
+# mpc play
+
+mpv $video_id --no-resume-playback
+
+# title=$(yt-dlp --get-title "$youtube_url")
+notify-send "Playing: " "$video_id"
