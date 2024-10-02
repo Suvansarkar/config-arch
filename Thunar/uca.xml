@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>Open Terminal Here</name>
+	<submenu></submenu>
+	<unique-id>1684778843721829-1</unique-id>
+	<command>exo-open --working-directory %f --launch TerminalEmulator</command>
+	<description>Example for a custom action</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon>nm-vpn-standalone-lock</icon>
+	<name>Open folder as root</name>
+	<submenu></submenu>
+	<unique-id>1686218447974577-1</unique-id>
+	<command>gksudo thunar %f</command>
+	<description>Open a folder as  super user</description>
+	<range>*</range>
+	<patterns>*</patterns>
+</action>
+</actions>
